@@ -31,3 +31,4 @@ preco_final = float(novo_preco)
 
 print(f"Preco formatado: {preco_final}")
 print(f"Tipo: {type(preco_final)}")
+
