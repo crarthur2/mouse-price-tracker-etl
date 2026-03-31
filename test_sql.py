@@ -32,7 +32,7 @@ class MousePreco(Base):
 if __name__ == '__main__':
     try:
         Base.metadata.create_all(engine)
-        print(f"Conexão estável e tabela 'precos_mouses pronta no banco '{db}'!")
+        print(f"Conexão estável e tabela 'precos_mouses' pronta no banco '{db}'!")
     except Exception as e:
         print(f"Erro ao configurar Banco de Dados: {e}")
 
