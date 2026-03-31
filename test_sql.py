@@ -8,10 +8,10 @@ from datetime import datetime
 os.environ['PGMESSAGES'] = 'en_US.UTF-8'
 load_dotenv()
 
-user = os.getenv('DB_USER', 'postgres')
+user = os.getenv('DB_USER')
 password = urllib.parse.quote_plus(os.getenv('DB_PASSWORD',''))
-host = os.getenv('DB_HOST', '172.23.112.1')
-port = os.getenv('DB_PORT','5432')
+host = os.getenv('DB_HOST')
+port = os.getenv('DB_PORT')
 db = os.getenv('DB_NAME', 'mouse_tracker')
 
 DATABASE_URL = f"postgresql://{user}:{password}@{host}:{port}/{db}"
