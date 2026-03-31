@@ -11,8 +11,8 @@ load_dotenv()
 user = os.getenv('DB_USER')
 password = urllib.parse.quote_plus(os.getenv('DB_PASSWORD',''))
 host = os.getenv('DB_HOST')
-port = os.getenv('DB_PORT')
-db = os.getenv('DB_NAME', 'mouse_tracker')
+port = os.getenv('DB_PORT', '5432')
+db = os.getenv('DB_NAME')
 
 DATABASE_URL = f"postgresql://{user}:{password}@{host}:{port}/{db}"
 engine = create_engine(DATABASE_URL)
