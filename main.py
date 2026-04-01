@@ -1,7 +1,13 @@
+import logging
 from sqlalchemy.orm import sessionmaker
 from test_sql import engine, MousePreco
-from datetime import datetime
 from teste_scrapping import extrai_dados_mouse
+
+logging.basicConfig(
+    filename='erro_tracker.log',
+    level=logging.ERROR,
+    format='%(asctime)s - %(levelname)s - %(message)s'  
+)
 
 urls = [
     'https://www.kabum.com.br/produto/988975/mouse-gamer-razer-deathadder-v3-30-000dpi-preto-rz01-04640100',
@@ -49,6 +55,8 @@ urls = [
 Session = sessionmaker(bind=engine)
 session = Session()
 
+urls = list(set(urls))
+
 try:
     for url in urls:
         print(f"Extraindo dados de {url}")
@@ -61,13 +69,16 @@ try:
                 preco=dados['Preco']
             )
             session.add(novo_mouse)
+        else:
+            logging.warning(f"Falha na extração da URL: {url}")
 
     session.commit()
-    print("Todos os produtos foram inseridos no banco!")
+    print("Sucesso!")
 
 except Exception as e:
     session.rollback()
-    print(f"Erro de {e}")
+    logging.error(f"Erro no processo: {e}", exc_info=True)
+    print(f"Erro registrado no log: {e}")
 
 finally:
     session.close()

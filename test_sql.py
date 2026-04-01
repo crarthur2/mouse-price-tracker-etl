@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from sqlalchemy import  create_engine, Column, Integer, String, Float, DateTime, UniqueConstraint
+from sqlalchemy import  create_engine, Column, Integer, String, Float, UniqueConstraint, Date, cast, func
 from sqlalchemy.orm import declarative_base
 from datetime import datetime
 
@@ -24,9 +24,8 @@ class MousePreco(Base):
     nome_produto = Column(String, nullable=False)
     loja = Column(String, nullable=False)
     preco = Column(Float, nullable=False)
-    data_coleta = Column(DateTime, default=datetime.now)
-    __table_args__ = (UniqueConstraint('nome_produto', 'loja', 'preco'),)
-
+    data_coleta = Column(Date, default=func.current_date())
+    __table_args__ = (UniqueConstraint('nome_produto', 'loja', 'data_coleta'),)
 
 if __name__ == '__main__':
     try:
