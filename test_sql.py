@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from sqlalchemy import  create_engine, Column, Integer, String, Float, DateTime
+from sqlalchemy import  create_engine, Column, Integer, String, Float, DateTime, UniqueConstraint
 from sqlalchemy.orm import declarative_base
 from datetime import datetime
 
@@ -25,6 +25,7 @@ class MousePreco(Base):
     loja = Column(String, nullable=False)
     preco = Column(Float, nullable=False)
     data_coleta = Column(DateTime, default=datetime.now)
+    __table_args__ = (UniqueConstraint('nome_produto', 'loja', 'preco'),)
 
 
 if __name__ == '__main__':
@@ -33,12 +34,3 @@ if __name__ == '__main__':
         print(f"Conexão estável e tabela 'preco_mouses' pronta no banco '{db}'!")
     except Exception as e:
         print(f"Erro ao configurar Banco de Dados: {e}")
-
-
-
-
-
-
-
-
-

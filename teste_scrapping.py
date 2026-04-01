@@ -8,6 +8,8 @@ def extrai_dados_mouse(url):
         soup = BeautifulSoup(response.text, 'html.parser')
 
         preco_elemento = soup.find('h4', class_='text-secondary-500')
+        if not preco_elemento:
+            return None
         preco_texto = preco_elemento.text
         preco_limpo = float(preco_texto.replace("R$",'').replace(".",'').replace(",",'.').strip())
 
@@ -19,4 +21,3 @@ def extrai_dados_mouse(url):
     except Exception as e:
         print(f"Erro ao extrair preco mouse {e}")
         return None
-

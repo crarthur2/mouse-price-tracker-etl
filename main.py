@@ -63,7 +63,7 @@ try:
             session.add(novo_mouse)
 
     session.commit()
-    print("Todos os precos foram inseridos no banco!")
+    print("Todos os produtos foram inseridos no banco!")
 
 except Exception as e:
     session.rollback()
