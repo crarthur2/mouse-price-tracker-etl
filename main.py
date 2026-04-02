@@ -1,7 +1,12 @@
+import os
 import logging
 from sqlalchemy.orm import sessionmaker
 from test_sql import engine, MousePreco
 from teste_scrapping import extrai_dados_mouse
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
 
 logging.basicConfig(
     filename='erro_tracker.log',

@@ -1,6 +1,9 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from test_sql import engine
+
+caminho_projeto = os.path.dirname(os.path.abspath(__file__))
 
 # Carregamento e limpeza
 query = "SELECT * FROM preco_mouses"
@@ -61,7 +64,7 @@ if not df.empty:
     plt.xticks(rotation=45)
     plt.tight_layout()
 
-    plt.savefig('historico_precos.png')
+    plt.savefig(os.path.join(caminho_projeto, 'historico_precos.png'))
     print("\nGráfico gerado com sucesso: 'histórico_precos.png'")
 
 
